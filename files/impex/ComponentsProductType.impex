@@ -1,0 +1,42 @@
+# Insert Component Product Types and its images
+$version=Staged
+$contentCatalog=centralArProductCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+$productCatalog=centralArProductCatalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default=$version])[unique=true,default=$productCatalog:$version]
+$picture=media(code, $contentCV)
+$medias=medias(code, $contentCV);
+$mediaContainer=media(qualifier, $contentCV)[lang=$lang];
+$siteResource = jar:br.com.centralar.initialdata.setup.InitialDataSystemSetup&/centralarinitialdata/import/sampledata/productCatalogs/$productCatalog/images/productComponents
+$lang=pt
+
+# Media Content
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]         ; realfilename                ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/gif']; altText; folder(qualifier)[default = 'images']
+                   ;                          ; cond_horiz_1_vent.gif       ; cond_horiz_1_vent.gif       ; $siteResource/cond_horiz_1_vent.gif                                       ;                            ;        ;
+                   ;                          ; cond_horiz_2_vent.gif       ; cond_horiz_2_vent.gif       ; $siteResource/cond_horiz_2_vent.gif                                       ;                            ;        ;
+                   ;                          ; cond_retangular.gif         ; cond_retangular.gif         ; $siteResource/cond_retangular.gif                                         ;                            ;        ;
+                   ;                          ; cond_vert_quadrada.gif      ; cond_vert_quadrada.gif      ; $siteResource/cond_vert_quadrada.gif                                      ;                            ;        ;
+                   ;                          ; cond_vert_redonda.gif       ; cond_vert_redonda.gif       ; $siteResource/cond_vert_redonda.gif                                       ;                            ;        ;
+                   ;                          ; evap_cassete.gif            ; evap_cassete.gif            ; $siteResource/evap_cassete.gif                                            ;                            ;        ;
+                   ;                          ; evap_cassete_det_painel.gif ; evap_cassete_det_painel.gif ; $siteResource/evap_cassete_det_painel.gif                                 ;                            ;        ;
+                   ;                          ; evap_cort.gif               ; evap_cort.gif               ; $siteResource/evap_cort.gif                                               ;                            ;        ;
+                   ;                          ; evap_jan.gif                ; evap_jan.gif                ; $siteResource/evap_jan.gif                                                ;                            ;        ;
+                   ;                          ; evap_jan_mold.gif           ; evap_jan_mold.gif           ; $siteResource/evap_jan_mold.gif                                           ;                            ;        ;
+                   ;                          ; evap_piso_teto.gif          ; evap_piso_teto.gif          ; $siteResource/evap_piso_teto.gif                                          ;                            ;        ;
+                   ;                          ; evap_port.gif               ; evap_port.gif               ; $siteResource/evap_port.gif                                               ;                            ;        ;
+                   ;                          ; evap_split.gif              ; evap_split.gif              ; $siteResource/evap_split.gif  
+
+INSERT_UPDATE ComponentProductType;name[unique=true]                ; image(code, $contentCV)
+                                  ;"Cond Horizontal 1 ventilador"   ; cond_horiz_1_vent.gif
+                                  ;"Cond Horizontal 2 ventiladores" ; cond_horiz_2_vent.gif
+                                  ;"Cond Retangular"                ; cond_retangular.gif
+                                  ;"Cond Vertical quadrada"         ; cond_vert_quadrada.gif
+                                  ;"Cond Vertical redonda"          ; cond_vert_redonda.gif
+                                  ;"Evap Split"                     ; evap_split.gif
+                                  ;"Evap Cassete"                   ; evap_cassete.gif
+                                  ;"Evap Cassete Detalhado painel"  ; evap_cassete_det_painel.gif
+                                  ;"Evap Janela com Moldura"        ; evap_jan.gif
+                                  ;"Evap Janela sem Moldura"        ; evap_jan_mold.gif
+                                  ;"Evap Cortina"                   ; evap_cort.gif
+                                  ;"Evap Portatil"                  ; evap_port.gif
+                                  ;"Evap Piso Teto"                 ; evap_piso_teto.gif

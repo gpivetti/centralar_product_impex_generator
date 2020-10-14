@@ -1,0 +1,16 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Products
+
+# Macros / Replacement Parameter definitions
+$productCatalog = centralArProductCatalog
+$catalogVersion = catalogversion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default=$productCatalog:Staged]
+
+# Especificacion Catalog
+$classCatalogVersion      = catalogversion(catalog(id[default='centralArClassificationCatalog']),version[default='1.0'])[unique=true,default='centralArClassificationCatalog:1.0']
+$technicalSpecifications  = supercategories(code, $classCatalogVersion)
+
+# Update product informations
+UPDATE CentralArProduct; code[unique = true]; slog; name; alternateName; componentProductType(name[unique=true]); descriptionLongVerum; descriptionShortVerum; primaryImage; imagemThumbNail; otherImages; $technicalSpecifications; approvalstatus(code)[default='approved']; $catalogVersion;
+"#% impex.includeExternalDataMedia( ""CentralArProduct.csv"" , ""UTF-8"", ';',  1 , -1 );"

@@ -1,0 +1,9 @@
+$productCatalog=centralArProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$classificationCatalog=centralArClassificationCatalog
+$classCatalogVersion=catalogversion(catalog(id[default=$classificationCatalog]),version[default='1.0'])[unique=true,default='centralArClassificationCatalog:1.0']
+$technicalSpecifications = supercategories(code, $classCatalogVersion)
+
+INSERT_UPDATE ComponentProduct; code[unique=true]; name; componentType(name[unique=true]); $technicalSpecifications; approvalstatus(code)[default='approved']; $catalogVersion;
+"#% impex.includeExternalDataMedia( ""ComponentProduct.csv"" , ""UTF-8"", ';',  1 , -1 );"
