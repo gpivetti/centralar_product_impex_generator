@@ -73,40 +73,40 @@ $evaporatorOrder = array(
     47        => '@WIDTH',
     48        => '@HEIGHT',
     49        => '@DEPTH',
-    11        => '@NET_WEIGHT',
-    11        => '@GROSS_WEIGHT'
+    '11>1'    => '@NET_WEIGHT',
+    '11>2'    => '@GROSS_WEIGHT'
   ),
   2 => array(
     '[default]=' => '@EAN_CODE',
     64           => '@WIDTH',
     60           => '@HEIGHT',
     68           => '@DEPTH',
-    72           => '@NET_WEIGHT',
-    72           => '@GROSS_WEIGHT'
+    '72>1'       => '@NET_WEIGHT',
+    '72>2'       => '@GROSS_WEIGHT'
   ),
   3 => array(
     '[default]=' => '@EAN_CODE',
     65           => '@WIDTH',
     61           => '@HEIGHT',
     69           => '@DEPTH',
-    73           => '@NET_WEIGHT',
-    73           => '@GROSS_WEIGHT'
+    '73>1'       => '@NET_WEIGHT',
+    '73>2'       => '@GROSS_WEIGHT'
   ),
   4 => array(
     '[default]=' => '@EAN_CODE',
     66           => '@WIDTH',
     62           => '@HEIGHT',
     70           => '@DEPTH',
-    74           => '@NET_WEIGHT',
-    74           => '@GROSS_WEIGHT'
+    '74>1'       => '@NET_WEIGHT',
+    '74>2'       => '@GROSS_WEIGHT'
   ),
   5 => array(
     '[default]=' => '@EAN_CODE',
     67           => '@WIDTH',
     63           => '@HEIGHT',
     70           => '@DEPTH',
-    75           => '@NET_WEIGHT',
-    75           => '@GROSS_WEIGHT'
+    '75>1'       => '@NET_WEIGHT',
+    '75>2'       => '@GROSS_WEIGHT'
   )
 );
 

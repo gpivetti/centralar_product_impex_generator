@@ -1,9 +1,33 @@
-$productCatalog=centralArProductCatalog
-$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Components
 
-$classificationCatalog=centralArClassificationCatalog
-$classCatalogVersion=catalogversion(catalog(id[default=$classificationCatalog]),version[default='1.0'])[unique=true,default='centralArClassificationCatalog:1.0']
+#% impex.setLocale(Locale.ENGLISH);
+
+# Catalogs
+$productCatalog         = centralArProductCatalog
+$classificationCatalog  = centralArClassificationCatalog
+
+# Catalog's versions
+$catalogVersion       = catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$classCatalogVersion  = catalogversion(catalog(id[default=$classificationCatalog]),version[default='1.0'])[unique=true,default='centralArClassificationCatalog:1.0']
+
+# Technical Specifications
 $technicalSpecifications = supercategories(code, $classCatalogVersion)
 
-INSERT_UPDATE ComponentProduct; code[unique=true]; name; componentType(name[unique=true]); $technicalSpecifications; approvalstatus(code)[default='approved']; $catalogVersion;
+# Attributes
+$clAttrModifiers = system='$classificationCatalog', version='1.0', translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator, lang=pt
+$feature01 = @EAN_CODE[$clAttrModifiers];
+$feature02 = @COLOR[$clAttrModifiers];
+$feature03 = @WIDTH[$clAttrModifiers];
+$feature04 = @HEIGHT[$clAttrModifiers];
+$feature05 = @DEPTH[$clAttrModifiers];
+$feature06 = @NET_WEIGHT[$clAttrModifiers];
+$feature07 = @GROSS_WEIGHT[$clAttrModifiers];
+
+INSERT_UPDATE ComponentProduct; code[unique=true]; name; componentType(name[unique=true]); $technicalSpecifications; $feature01 ; $feature02 ; $feature03 ; $feature04 ; $feature05 ; $feature06 ; $feature07 ; approvalstatus(code)[default='approved']; $catalogVersion;
 "#% impex.includeExternalDataMedia( ""ComponentProduct.csv"" , ""UTF-8"", ';',  1 , -1 );"
+
+UPDATE CentralArProduct; code[unique = true] ; components(code[unique=true], $catalogVersion); $catalogVersion;
+"#% impex.includeExternalDataMedia( ""CentralArProductComponents.csv"" , ""UTF-8"", ';',  1 , -1 );"

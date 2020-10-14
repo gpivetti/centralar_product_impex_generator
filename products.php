@@ -14,19 +14,14 @@
   }
 
   $filesNames = array(
-    1 => 'Products',
-    2 => 'ProductsSupercategories',
-    3 => 'ProductsComponents',
-    4 => 'ProductsAttributes',
-    5 => 'ProductsComponentsAttributes'
-  );
-
-  $filesObjects = array(
-    1 => 'CentralArProduct',
-    2 => 'CentralArProduct',
-    3 => 'ComponentProduct',
-    4 => 'CentralArProduct',
-    5 => 'ComponentProduct'
+    1 => array(
+      'impex' => 'Products',
+      'csv'   => array('CentralArProduct', 'CentralArProductSupercategories')
+    ),
+    2 => array(
+      'impex' => 'ProductsComponents',
+      'csv'   => array('ComponentProduct', 'CentralArProductComponents')
+    )
   );
 
   $db = new Database();
@@ -128,21 +123,12 @@
     // Cria arquivo de products (1)
     include PRODUCT_PATH.'products.php';
 
-    // Cria arquivo de supercategorias do Produto (2)
-    include PRODUCT_PATH.'productsSupercategories.php';
-
-    // Cria arquivo de componentes dos produtos (3)
+    // Cria arquivo de componentes dos produtos (2)
     include COMPONENT_PATH.'components.php';
-
-    // Cria arquivo de Atributos dos Produtos (4)
-    include PRODUCT_PATH.'productsAttributes.php';
-
-    // Cria arquivo de Atributos dos Componentes (5)
-    include COMPONENT_PATH.'componentsAttributes.php';
 
     // Zipando os arquivos
     echo "\n\n=> Exportando os Conteúdos";
-    zipFiles($filesNames, $filesObjects);
+    zipFiles($filesNames);
 
     echo "\n\n=> Finalizado!\n";
   }

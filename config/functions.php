@@ -12,24 +12,23 @@
     return ($code >= 200 && $code < 300);
   }
 
-  function zipFiles($fileNames = false, $fileObjects = false, $subDirectory = '') {
-    if (
-      $fileNames and is_array($fileNames) and count($fileNames) > 0 and
-      $fileObjects and is_array($fileObjects) and count($fileObjects) > 0 and
-      count($fileNames) == count($fileObjects)
-    ) {
+  function zipFiles($fileNames = false, $subDirectory = '') {
+    if ($fileNames and is_array($fileNames) and count($fileNames) > 0) {
       foreach($fileNames as $key => $value) {
-        $impexFile = IMPEX_PATH.$value.'.impex';
-        $csvFile = CSV_PATH.$value.'.csv';
-        if (!empty($value) and file_exists($impexFile) and file_exists($csvFile)) {
-          echo "\n".$key.' - '.$value.'.zip';
-          $zip = new ZipArchive();
-          if ($zip->open(ZIP_PATH . $subDirectory . $value . '.zip', ZIPARCHIVE::CREATE) == TRUE) {
-            $zip->addFile($impexFile, 'importscript.impex');
-            $zip->addFile($csvFile, $fileObjects[$key].'.csv');
+        echo "\n".$key.' - '.$value['impex'].'.zip';
+        $impexFile = IMPEX_PATH.$value['impex'].'.impex';
+        foreach($value['csv'] as $keyCSV => $valueCSV) {
+          $csvFile = CSV_PATH.$valueCSV.'.csv';
+          if (!empty($valueCSV) and file_exists($impexFile) and file_exists($csvFile)) {
+            echo "\n".'   '.$key.'.'.$keyCSV.' - '.$valueCSV.'.csv';
+            $zip = new ZipArchive();
+            if ($zip->open(ZIP_PATH . $subDirectory . $value['impex'] . '.zip', ZIPARCHIVE::CREATE) == TRUE) {
+              $zip->addFile($impexFile, 'importscript.impex');
+              $zip->addFile($csvFile, $valueCSV.'.csv');
+            }
+            $zip->close();
+            unset($zip);
           }
-          $zip->close();
-          unset($zip);
         }
       }
     }

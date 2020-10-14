@@ -1,10 +1,11 @@
 <?php
   echo "\n1 - Exportando as Informações dos Produtos....";
 
-  $file = fopen(CSV_PATH.$filesNames[1].'.csv', 'wr');
+  $file                 = fopen(CSV_PATH.$filesNames[1]['csv'][0].'.csv', 'wr');
+  $fileSupercategories  = fopen(CSV_PATH.$filesNames[1]['csv'][1].'.csv', 'wr');
 
   // Exportando as colunas Bases
-  $informationsColumns = array(
+  $productsColumns = array(
     '# code', 
     'slog',
     'name',
@@ -15,14 +16,31 @@
     'primaryImage',
     'imagemThumbNail',
     'otherImages',
-    'supercategories',
-    'approvalstatus',
-    'catalogversion'
+    'supercategories'
   );
-  fwrite($file, implode(";", $informationsColumns) . "\n");
+  foreach ($condenserOrder as $fieldKey => $fieldValue) {
+    array_push($productsColumns, $fieldValue);
+  } 
+  array_push($productsColumns, 'approvalstatus'); 
+  array_push($productsColumns, 'catalogVersion'); 
+  fwrite($file, implode(";", $productsColumns) . "\n");
+
+  // Exportando as colunas Bases dos Produtos com as Categorias
+  $productSupercategoriesColumns = array(
+    '# code',
+    'supercategories',
+    'catalogVersion'
+  );
+  fwrite($fileSupercategories, implode(";", $productSupercategoriesColumns) . "\n");  
 
   // Exportando os dados dos produtos
   foreach ($products as $key => $product) {
+    /**
+     * ***********************************************************************
+     * [START] PRODUCT
+     * ***********************************************************************
+     */    
+    // Tipo da Condensadora
     if (isset($condenserComponentType[$product['id_condensadora']])) {
       $condType = $condenserComponentType[$product['id_condensadora']];
     }
@@ -45,7 +63,8 @@
       }
     }
 
-    $informationProduct = array(
+    // Dados bases do Produto
+    $productsColumnsRows = array(
       $product['cod_pro'],
       trim($product['slug']),
       trim($product['nom_pro']),
@@ -56,18 +75,139 @@
       $primaryImage,
       $primaryImage,
       $otherImages,
-      'ESPECIFICACOES_TECNICAS:centralArClassificationCatalog:1.0',
-      'approved'      
+      'ESPECIFICACOES_TECNICAS:centralArClassificationCatalog:1.0'  
     );
 
+    // Atributos e descrições ténicas
+    $attributesValuesArray = array();
+    if (count($product['descriptionFields']) > 0) {      
+      foreach ($condenserOrder as $fieldKey => $fieldValue) {
+        // Descrição do produto para a chave
+        if(isset($product['descriptionFields'][$fieldKey]) and !empty($product['descriptionFields'][$fieldKey]['value'])) {
+          $measurementUnity = $product['descriptionFields'][$fieldKey]['unity'];
+          $descriptionValue = $product['descriptionFields'][$fieldKey]['value'];
+        }
+        else {
+          $measurementUnity = '';
+          $descriptionValue = '';
+        }
+
+        // Retorna o valor correto do campo
+        $columnValue = getAttributeValueByDefault($fieldValue);
+        if (empty($columnValue)) {
+          list($columnValueSuccess, $columnValue) = getAttributeValueByDescriptionIndetificator($fieldKey, $descriptionValue);
+          if (!$columnValueSuccess) {            
+            list($columnValueSuccess, $columnValue) = getAttributeValueByProductAttributes($fieldKey, $product);
+            if (!$columnValueSuccess) {
+              $columnValue = getAttributeValueByValue($descriptionValue, $measurementUnity);
+            }
+          }
+        }
+
+        $attributesValuesArray[] = $columnValue;
+      }              
+    }
+    
+    // Atributos que faltarão ficaram vazios
+    if (count($attributesValuesArray) < count($condenserOrder)) {
+      $attrbituesRemaining = count($condenserOrder) - count($attributesValuesArray);
+      for ($cont = 0 ; $cont < $attrbituesRemaining ; $cont++) {
+        $attributesValuesArray[] = '';
+      }
+    }
+
+    $productsColumnsRows = array_merge($productsColumnsRows,$attributesValuesArray);
+
     // Staged and Online Product
-    $productStaged = $informationProduct;
-    $productOnline = $informationProduct;
-    $productStaged[] = 'centralArProductCatalog:Staged';
+    $productStaged = $productsColumnsRows;
+    $productOnline = $productsColumnsRows;
+    $productStaged[] = 'approved';
+    $productStaged[] = 'centralArProductCatalog:Staged';    
+    $productOnline[] = 'approved';
     $productOnline[] = 'centralArProductCatalog:Online';
     fwrite($file, implode(";", $productStaged) . "\n");
     fwrite($file, implode(";", $productOnline) . "\n");
+    /**
+     * ***********************************************************************
+     * [END] PRODUCT
+     * ***********************************************************************
+     */    
+
+
+    /**
+     * ***********************************************************************
+     * [START] SUPER CATEGORIES
+     * ***********************************************************************
+     */
+    if (isset($arrayClassificationsByBtus[$product['cod_cat']])) {
+      $superCategories = array();
+
+      // Último nível da categoria
+      if ($product['cod_cat'] == 50000) { // Serviços
+
+      }
+      else if ($product['cod_cat'] == 66) { // Multi Split
+        if (isset($arrayClassificationsByBtus[$product['cod_cat']][$product['cod_sub']])) {
+          $superCategories[] = trim($arrayClassificationsByBtus[$product['cod_cat']][$product['cod_sub']]);
+        }
+      }
+      else {
+        foreach ($arrayClassificationsByBtus[$product['cod_cat']] as $key => $value) {
+          if ($product['btus'] < $key) {
+            $superCategories[] = trim($value);
+            break;
+          }
+        }
+      }
+
+      // Supercategorias por categorias
+      if (
+        isset($arrayClassificationsByCategories[$product['cod_cat']][$product['fabCodigo']]) and
+        !empty($arrayClassificationsByCategories[$product['cod_cat']][$product['fabCodigo']])
+      ) {
+        $superCategories[] = trim($arrayClassificationsByCategories[$product['cod_cat']][$product['fabCodigo']]);
+      }
+
+      if (count($superCategories) >= 2) {
+        $superCategoriesStaged = '';
+        $superCategoriesOnline = '';
+
+        foreach ($superCategories as $key => $value) {
+          if (!empty($superCategoriesStaged)) {
+            $superCategoriesStaged .= ',';
+          }
+          $superCategoriesStaged .= trim($value) . ':centralArProductCatalog:Staged';
+
+          if (!empty($superCategoriesOnline)) {
+            $superCategoriesOnline .= ',';
+          }
+          $superCategoriesOnline .= trim($value) . ':centralArProductCatalog:Online';          
+        }
+
+        // Staged
+        $supercategoriesColumnsStagedRows = array(
+          $product['cod_pro'],
+          $superCategoriesStaged,
+          'centralArProductCatalog:Staged'
+        );
+        fwrite($fileSupercategories, implode(";", $supercategoriesColumnsStagedRows) . "\n");
+
+        // Online
+        $supercategoriesColumnsOnlineRows = array(
+          $product['cod_pro'],
+          $superCategoriesOnline,
+          'centralArProductCatalog:Online'
+        );
+        fwrite($fileSupercategories, implode(";", $supercategoriesColumnsOnlineRows) . "\n");
+      }
+    }
+    /**
+     * ***********************************************************************
+     * [END] SUPER CATEGORIES
+     * ***********************************************************************
+     */     
   }
 
   fclose($file);
+  fclose($fileSupercategories);
 ?>
