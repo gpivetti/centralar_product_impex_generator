@@ -10,8 +10,8 @@ $productCatalog         = centralArProductCatalog
 $classificationCatalog  = centralArClassificationCatalog
 
 # Catalog's versions
-$catalogVersion       = catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$classCatalogVersion  = catalogversion(catalog(id[default=$classificationCatalog]),version[default='1.0'])[unique=true,default='centralArClassificationCatalog:1.0']
+$catalogVersion       = catalogversion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default=$productCatalog:Staged]
+$classCatalogVersion  = catalogversion(catalog(id[default='centralArClassificationCatalog']),version[default='1.0'])[unique=true,default='centralArClassificationCatalog:1.0']
 
 # Technical Specifications
 $technicalSpecifications = supercategories(code, $classCatalogVersion)

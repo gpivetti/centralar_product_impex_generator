@@ -114,6 +114,9 @@
       $rowProduto['numberOfComponents'] += 1;
     }
 
+    // Slug do Produto
+    $rowProduto['slug'] = trim(strtolower(str_ireplace(array('.html', '.htm'), '', $rowProduto['slug'])));
+
     $products[] = $rowProduto;
   }
 
