@@ -36,8 +36,11 @@
                   p.description,
                   p.id_condensadora,
                   p.id_evaporizadora,
+                  p.qtd_evaporizadoras,
                   p.id_evaporizadora_2,
+                  p.qtd_evaporizadoras_2,
                   p.id_evaporizadora_3,
+                  p.qtd_evaporizadoras_3,
                   p.inverter,
                   p.btus,
                   p.inverter,
@@ -66,7 +69,7 @@
                   left join url u on u.nivel = "prod" and u.id_nivel = p.cod_pro
                   left join sub_categoria sc on sc.cod_sub = p.cod_sub 
           where	  p.cod_pro in ('.$productParameters.')
-                  and not p.cod_cat in (66, 50000)
+                  and not p.cod_cat in (50000)
                   and not exists (
                     select skus from produtos_outlet po where po.skus = p.cod_pro 
                   )';
@@ -102,16 +105,21 @@
       }
     }
     
-    // Quantidade de componentes
+    // Quantidade de componentes (para quem possui)
     $rowProduto['numberOfComponents'] = 0;
-    if (!empty($rowProduto['id_evaporizadora'])) {
-      $rowProduto['numberOfComponents'] += 1;
-    }
-    if (!empty($rowProduto['id_evaporizadora_2'])) {
-      $rowProduto['numberOfComponents'] += 1;
-    }
-    if (!empty($rowProduto['id_evaporizadora_3'])) {
-      $rowProduto['numberOfComponents'] += 1;
+    if (in_array($rowProduto['cod_cat'], array(63, 64, 65, 66, 99))) {
+      if (!empty($rowProduto['id_evaporizadora']) and !empty($rowProduto['qtd_evaporizadoras'])) {
+        $rowProduto['numberOfComponents'] += $rowProduto['qtd_evaporizadoras'];
+      }
+      if (!empty($rowProduto['id_evaporizadora_2']) and !empty($rowProduto['qtd_evaporizadoras_2'])) {
+        $rowProduto['numberOfComponents'] += $rowProduto['qtd_evaporizadoras_2'];
+      }
+      if (!empty($rowProduto['id_evaporizadora_3']) and !empty($rowProduto['qtd_evaporizadoras_3'])) {
+        $rowProduto['numberOfComponents'] += $rowProduto['qtd_evaporizadoras_3'];
+      }
+      if ($rowProduto['numberOfComponents'] > 5) {
+        $rowProduto['numberOfComponents'] = 5;
+      }
     }
 
     // Slug do Produto

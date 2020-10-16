@@ -15,324 +15,343 @@ $categories = target(code, $catalogVersion)[unique=true]
 $lang = pt
 
 # Create Categories
-INSERT_UPDATE Category; code[unique = true]; name[lang = $lang]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion;
-					; AR_E_VENTILACAO		; "Ar e Ventilacao"
-                    			; AR_CONDICIONADO		; "Ar Condicionado"
-					; DEPARTAMENTOS			; 
-	                		; NAV_AR_CONDICIONADO		; "ar-condicionado"
+INSERT_UPDATE Category; code[unique = true]; name[lang = $lang];  idVerum ; nameVerum ;  allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion;
+											; AR_E_VENTILACAO				; "Ar e Ventilacao" ; 10 ; "Ar e Ventilacao"
+                    	; AR_CONDICIONADO				; "Ar Condicionado" ; 20 ; "Ar Condicionado"
+											; DEPARTAMENTOS					; 
+	                		; NAV_AR_CONDICIONADO		; "ar-condicionado" ;
 
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'DEPARTAMENTOS']
-                                    	; AR_E_VENTILACAO  	 	;
+                                    		; AR_E_VENTILACAO ;
 
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'AR_E_VENTILACAO']
-                                     	; AR_CONDICIONADO  	 	;
+                                     		; AR_CONDICIONADO ;
 
 
-INSERT_UPDATE Category; code[unique = true]; name[lang = $lang]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion;
-					;  MARCAS             		; "marcas"
-					;  AGRATTO            		; "agratto"
-					;  CARRIER            		; "carrier"
-					;  COMFEE             		; "comfee"
-					;  CONSUL             		; "consul"
-					;  DAIKIN             		; "daikin"
-					;  DELONGHI           		; "delonghi"
-					;  ELECTROLUX         		; "electrolux"
-					;  FONTAINE           		; "fontaine"
-					;  FUJITSU            		; "fujitsu"
-					;  GREE               		; "gree"
-					;  HITACHI            		; "hitachi"
-					;  KOMECO             		; "komeco"
-					;  LG                 		; "lg"
-					;  MIDEA              		; "midea"
-					;  RINETTO            		; "rinetto"
-					;  SAMSUNG            		; "samsung"
-					;  SPRINGER           		; "springer"
-					;  SPRINGER_MIDEA     		; "springer-midea"
-					;  TRANE              		; "trane"
-					;  ELGIN              		; "elgin"
-					;  BI_SPLIT           		; "bi-split"
-					;  TRI_SPLIT          		; "tri-split"
-					;  QUADRI_SPLIT       		; "quadri-split"
-					;  CASSETE            		; "cassete"
-					;  INVERTER           		; "inverter"
-					;  JANELA             		; "janela"
-					;  MULTI_SPLIT        		; "multi-split"
-					;  PISO_TETO          		; "piso-teto"
-					;  PORTATIL           		; "portatil"
-					;  SPLIT              		; "split"
-					;  CORTINA_DE_AR      		; "cortina-de-ar"
- 					;  SERVICOS           		; "servicos"
-					;  NAV_SERVICOS       		; "servicos"
-					;  INSTALACAO         		; "instalacao"
-					;  LIMPEZA            		; "limpeza"
-					;  90CM		      		; "90cm"
-					;  120CM              		; "120cm"
-					;  150CM              		; "150cm"
+INSERT_UPDATE Category; code[unique = true]			; name[lang = $lang]; idVerum ; nameVerum ; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion;
+											;  MARCAS             		; "marcas"
+											;  AGRATTO            		; "agratto"
+											;  CARRIER            		; "carrier"
+											;  COMFEE             		; "comfee"
+											;  CONSUL             		; "consul"
+											;  DAIKIN             		; "daikin"
+											;  DELONGHI           		; "delonghi"
+											;  ELECTROLUX         		; "electrolux"
+											;  FONTAINE           		; "fontaine"
+											;  FUJITSU            		; "fujitsu"
+											;  GREE               		; "gree"
+											;  HITACHI            		; "hitachi"
+											;  KOMECO             		; "komeco"
+											;  LG                 		; "lg"
+											;  MIDEA              		; "midea"
+											;  RINETTO            		; "rinetto"
+											;  SAMSUNG            		; "samsung"
+											;  SPRINGER           		; "springer"
+											;  SPRINGER_MIDEA     		; "springer-midea"
+											;  TRANE              		; "trane"
+											;  ELGIN              		; "elgin"
+											;  CASSETE            		; "cassete" 				; 30 ; "Ar Condicionado Split Cassete"
+											;  INVERTER           		; "inverter" 				; 30 ; "Ar Condicionado Split Inverter"
+											;  JANELA             		; "janela" 					; 30 ; "Ar Condicionado Janela"
+											;  MULTI_SPLIT        		; "multi-split" 		; 30 ; "Ar Condicionado Multi Split"
+											;  PISO_TETO          		; "piso-teto" 			; 30 ; "Ar Condicionado Pisto Teto"
+											;  PORTATIL           		; "portatil" 				; 30 ; "Ar Condicionado Portátil"
+											;  SPLIT              		; "split" 					; 30 ; "Ar Condicionado Split"
+											;  CORTINA_DE_AR      		; "cortina-de-ar" 	; 30 ; "Cortina de Ar"
+											;  SERVICOS           		; "servicos"
+											;  NAV_SERVICOS       		; "servicos"
+											;  INSTALACAO         		; "instalacao"
+											;  LIMPEZA            		; "limpeza"
+											;  90CM		      					; "90cm"
+											;  120CM              		; "120cm"
+											;  150CM              		; "150cm"
 
-					;  LIMPEZA_SPLIT		; "limpeza-ar-condicionado-split"
-					;  LIMPEZA_INVERTER		; "limpeza-ar-condicionado-split-inverter" 
-					;  LIMPEZA_MULTI_SPLIT		; "limpeza-ar-condicionado-multi-split"
-					;  LIMPEZA_PISO_TETO		; "limpeza-ar-condicionado-piso-teto"
-					;  LIMPEZA_CASSETE		; "limpeza-ar-condicionado-cassete"
-					;  LIMPEZA_CORTINA_DE_AR	; "limpeza-cortina-de-ar"
+											;  LIMPEZA_SPLIT					; "limpeza-ar-condicionado-split"
+											;  LIMPEZA_INVERTER				; "limpeza-ar-condicionado-split-inverter" 
+											;  LIMPEZA_MULTI_SPLIT		; "limpeza-ar-condicionado-multi-split"
+											;  LIMPEZA_PISO_TETO			; "limpeza-ar-condicionado-piso-teto"
+											;  LIMPEZA_CASSETE				; "limpeza-ar-condicionado-cassete"
+											;  LIMPEZA_CORTINA_DE_AR	; "limpeza-cortina-de-ar"
 
-					;  INSTALACAO_SPLIT		; "limpeza-ar-condicionado-split"
-					;  INSTALACAO_INVERTER		; "limpeza-ar-condicionado-split-inverter" 
-					;  INSTALACAO_MULTI_SPLIT	; "limpeza-ar-condicionado-multi-split"
-					;  INSTALACAO_PISO_TETO		; "limpeza-ar-condicionado-piso-teto"
-					;  INSTALACAO_CASSETE		; "limpeza-ar-condicionado-cassete"
-					;  INSTALACAO_CORTINA_DE_AR	; "limpeza-cortina-de-ar"
+											;  INSTALACAO_SPLIT					; "limpeza-ar-condicionado-split"
+											;  INSTALACAO_INVERTER			; "limpeza-ar-condicionado-split-inverter" 
+											;  INSTALACAO_MULTI_SPLIT		; "limpeza-ar-condicionado-multi-split"
+											;  INSTALACAO_PISO_TETO			; "limpeza-ar-condicionado-piso-teto"
+											;  INSTALACAO_CASSETE				; "limpeza-ar-condicionado-cassete"
+											;  INSTALACAO_CORTINA_DE_AR	; "limpeza-cortina-de-ar"
 
-					;  CASSETE_17000_18000 		; "17000-18000-btus"
-                                        ;  CASSETE_22000_24000 		; "22000-24000-btus"
-					;  CASSETE_27000_32000 		; "27000-32000-btus"
-					;  CASSETE_33000_36000 		; "33000-36000-btus"
-					;  CASSETE_42000_46000 		; "42000-46000-btus"
-					;  CASSETE_47000_50000 		; "47000-50000-btus"
-					;  CASSETE_52000_60000 		; "52000-60000-btus"
-                      
-					;  CASSETE_DAIKIN      		; "daikin"
-					;  CASSETE_ELGIN       		; "elgin"
-					;  CASSETE_FUJITSU     		; "fujitsu"
-					;  CASSETE_CARRIER     		; "carrier"
-					;  CASSETE_TRANE       		; "trane"
-					;  CASSETE_LG          		; "lg"
+											;  CASSETE_17000_18000 		; "17000-18000-btus" ; 40 ; "17000 a 18000 BTUS" 
+											;  CASSETE_22000_24000 		; "22000-24000-btus" ; 40 ; "22000 a 24000 BTUS"
+											;  CASSETE_27000_32000 		; "27000-32000-btus" ; 40 ; "27000 a 32000 BTUS"
+											;  CASSETE_33000_36000 		; "33000-36000-btus" ; 40 ; "33000 a 36000 BTUS"
+											;  CASSETE_42000_46000 		; "42000-46000-btus" ; 40 ; "42000 a 46000 BTUS"
+											;  CASSETE_47000_50000 		; "47000-50000-btus" ; 40 ; "47000 a 50000 BTUS"
+											;  CASSETE_52000_60000 		; "52000-60000-btus" ; 40 ; "52000 a 60000 BTUS"
+																	
+											;  CASSETE_DAIKIN      		; "daikin"
+											;  CASSETE_ELGIN       		; "elgin"
+											;  CASSETE_FUJITSU     		; "fujitsu"
+											;  CASSETE_CARRIER     		; "carrier"
+											;  CASSETE_TRANE       		; "trane"
+											;  CASSETE_LG          		; "lg"
 
-			   		;  INVERTER_9000_10500  	; "9000-10500-btus"
-					;  INVERTER_11000_12000 	; "11000-12000-btus"
-                                        ;  INVERTER_17000_18000 	; "17000-18000-btus"
-                                        ;  INVERTER_22000_24000 	; "22000-24000-btus"            
-					;  INVERTER_27000_32000 	; "27000-32000-btus"
-                                           
-					;  INVERTER_CONSUL      	; "consul"
-					;  INVERTER_LG          	; "lg"
-					;  INVERTER_DAIKIN      	; "daikin"
-					;  INVERTER_FUJITSU     	; "fujitsu"
-					;  INVERTER_SPRINGER_MIDEA	; "springer-midea"
-					;  INVERTER_SAMSUNG     	; "samsung"
-					;  INVERTER_AGRATTO     	; "agratto"
-					;  INVERTER_TRANE       	; "trane"
-					;  INVERTER_GREE        	; "gree"
-       
-                      			;  JANELA_7000_8500   		; "7000-8500-btus"
-                      			;  JANELA_9000_10500  		; "9000-10500-btus"
-                      			;  JANELA_11000_12000 		; "11000-12000-btus"
-                      			;  JANELA_17000_18000 		; "17000-18000-btus"
-					;  JANELA_22000_24000 		; "22000-24000-btus"
-					;  JANELA_27000_32000 		; "27000-32000-btus"
-                      
-					;  JANELA_CONSUL         	; "consul"
-					;  JANELA_SPRINGER_MIDEA 	; "springer-midea"
-					;  JANELA_ELECTROLUX     	; "electrolux"
-					;  JANELA_FONTAINE       	; "fontaine"
-					;  JANELA_SPRINGER       	; "springer"
-       
-					;  MULTI_SPLIT_BI_SPLIT    	; "bi-split"
-					;  MULTI_SPLIT_TRI_SPLIT   	; "tri-split"
-					;  MULTI_SPLIT_QUADRI_SPLIT 	; "quadri-split"
+											;  INVERTER_9000_10500  	; "9000-10500-btus" 	; 40 ; "9000 a 10500 BTUS"
+											;  INVERTER_11000_12000 	; "11000-12000-btus" 	; 40 ; "11000 a 12000 BTUS"
+											;  INVERTER_17000_18000 	; "17000-18000-btus" 	; 40 ; "17000 a 18000 BTUS"
+											;  INVERTER_22000_24000 	; "22000-24000-btus" 	; 40 ; "22000 a 24000 BTUS"
+											;  INVERTER_27000_32000 	; "27000-32000-btus" 	; 40 ; "27000 a 32000 BTUS"
+																											
+											;  INVERTER_CONSUL      		; "consul"
+											;  INVERTER_LG          		; "lg"
+											;  INVERTER_DAIKIN      		; "daikin"
+											;  INVERTER_FUJITSU     		; "fujitsu"
+											;  INVERTER_SPRINGER_MIDEA	; "springer-midea"
+											;  INVERTER_SAMSUNG     		; "samsung"
+											;  INVERTER_AGRATTO     		; "agratto"
+											;  INVERTER_TRANE       		; "trane"
+											;  INVERTER_GREE        		; "gree"
+									
+											;  JANELA_7000_8500   		; "7000-8500-btus" 		; 40 ; "7000 a 8500 BTUS"
+											;  JANELA_9000_10500  		; "9000-10500-btus" 	; 40 ; "9000 a 10500 BTUS"
+											;  JANELA_11000_12000 		; "11000-12000-btus" 	; 40 ; "11000 a 12000 BTUS"
+											;  JANELA_17000_18000 		; "17000-18000-btus" 	; 40 ; "17000 a 18000 BTUS"
+											;  JANELA_22000_24000 		; "22000-24000-btus" 	; 40 ; "22000 a 24000 BTUS"
+											;  JANELA_27000_32000 		; "27000-32000-btus" 	; 40 ; "27000 a 32000 BTUS"
+																	
+											;  JANELA_CONSUL         	; "consul"
+											;  JANELA_SPRINGER_MIDEA 	; "springer-midea"
+											;  JANELA_ELECTROLUX     	; "electrolux"
+											;  JANELA_FONTAINE       	; "fontaine"
+											;  JANELA_SPRINGER       	; "springer"
+									
+											;  MULTI_SPLIT_BI_SPLIT    		; "bi-split" 				; 40 ; "Bi Split"
+											;  MULTI_SPLIT_TRI_SPLIT   		; "tri-split" 			; 40 ; "Tri Split"
+											;  MULTI_SPLIT_QUADRI_SPLIT 	; "quadri-split"	 	; 40 ; "Quadri Split"
 
-					;  MULTI_SPLIT_DAIKIN      	; "daikin"
-					;  MULTI_SPLIT_FUJITSU     	; "fujitsu"
-					;  MULTI_SPLIT_SAMSUNG     	; "samsung"
-					;  MULTI_SPLIT_SPRINGER_MIDEA	; "springer-midea"
-					;  MULTI_SPLIT_LG          	; "lg"
-                    
-					;  PISO_TETO_17000_18000 	; "17000-18000-btus"
-					;  PISO_TETO_22000_24000 	; "22000-24000-btus"
-					;  PISO_TETO_27000_32000 	; "27000-32000-btus"
-					;  PISO_TETO_33000_36000 	; "33000-36000-btus"
-					;  PISO_TETO_42000_46000 	; "42000-46000-btus"
-					;  PISO_TETO_47000_50000 	; "47000-50000-btus"
-					;  PISO_TETO_52000_60000 	; "52000-60000-btus"
-					;  PISO_TETO_80000       	; "80000-btus"
+											;  MULTI_SPLIT_DAIKIN      		; "daikin"
+											;  MULTI_SPLIT_FUJITSU     		; "fujitsu"
+											;  MULTI_SPLIT_SAMSUNG     		; "samsung"
+											;  MULTI_SPLIT_SPRINGER_MIDEA	; "springer-midea"
+											;  MULTI_SPLIT_LG          		; "lg"
 
-					;  PISO_TETO_ELGIN       	; "elgin"
-					;  PISO_TETO_CARRIER     	; "carrier"
-					;  PISO_TETO_FUJITSU     	; "fujitsu"
-					;  PISO_TETO_KOMECO      	; "komeco"
-					;  PISO_TETO_LG          	; "lg"
-					;  PISO_TETO_SPRINGER    	; "springer"
-					;  PISO_TETO_TRANE       	; "trane"
-					;  PISO_TETO_GREE        	; "gree"
+											;  PISO_TETO_17000_18000 	; "17000-18000-btus" 	; 40 ; "17000 a 18000 BTUS"
+											;  PISO_TETO_22000_24000 	; "22000-24000-btus" 	; 40 ; "22000 a 24000 BTUS"
+											;  PISO_TETO_27000_32000 	; "27000-32000-btus" 	; 40 ; "27000 a 32000 BTUS"
+											;  PISO_TETO_33000_36000 	; "33000-36000-btus" 	; 40 ; "33000 a 36000 BTUS"
+											;  PISO_TETO_42000_46000 	; "42000-46000-btus" 	; 40 ; "42000 a 46000 BTUS"
+											;  PISO_TETO_47000_50000 	; "47000-50000-btus" 	; 40 ; "47000 a 50000 BTUS"
+											;  PISO_TETO_52000_60000 	; "52000-60000-btus" 	; 40 ; "52000 a 60000 BTUS"
+											;  PISO_TETO_80000       	; "80000-btus" 				; 40 ; "80000 a BTUS"
 
-					;  PORTATIL_11000_12000 	; "11000-12000-btus"
-       
-					;  PORTATIL_AGRATTO 		; "agratto"
-       
-					;  SPLIT_7000_8500   		; "7000-8500-btus"
-					;  SPLIT_9000_10500  		; "9000-10500-btus"
-					;  SPLIT_11000_12000 		; "11000-12000-btus"
-                                        ;  SPLIT_17000_18000 		; "17000-18000-btus"
-                                        ;  SPLIT_22000_24000 		; "22000-24000-btus"
-					;  SPLIT_27000_32000 		; "27000-32000-btus"
-                      
-					;  SPLIT_ELECTROLUX  		; "electrolux"
-					;  SPLIT_CONSUL      		; "consul"
-					;  SPLIT_GREE        		; "gree"
-					;  SPLIT_SPRINGER_MIDEA		; "springer-midea"
-					;  SPLIT_FONTAINE    		; "fontaine"
-					;  SPLIT_AGRATTO     		; "agratto"
-					;  SPLIT_RINETTO     		; "rinetto"
-					;  SPLIT_COMFEE      		; "comfee"
-       
-					;  CORTINA_DE_AR_SPRINGER	; "springer"
-					;  CORTINA_DE_AR_AGRATTO 	; "agratto"
-					;  CORTINA_DE_AR_ELGIN		; "elgin"
+											;  PISO_TETO_ELGIN       	; "elgin"
+											;  PISO_TETO_CARRIER     	; "carrier"
+											;  PISO_TETO_FUJITSU     	; "fujitsu"
+											;  PISO_TETO_KOMECO      	; "komeco"
+											;  PISO_TETO_LG          	; "lg"
+											;  PISO_TETO_SPRINGER    	; "springer"
+											;  PISO_TETO_TRANE       	; "trane"
+											;  PISO_TETO_GREE        	; "gree"
 
-					;  CORTINA_DE_AR_90CM		; "90cm"
-					;  CORTINA_DE_AR_120CM		; "120cm"
-					;  CORTINA_DE_AR_150CM		; "150cm"
+											;  PORTATIL_11000_12000 	; "11000-12000-btus" ; 40 ; "11000 a 12000 BTUS"
+									
+											;  PORTATIL_AGRATTO 			; "agratto"
+									
+											;  SPLIT_7000_8500   		; "7000-8500-btus" 		; 40 ; "7000 a 8500 BTUS"
+											;  SPLIT_9000_10500  		; "9000-10500-btus" 	; 40 ; "9000 a 10500 BTUS"
+											;  SPLIT_11000_12000 		; "11000-12000-btus" 	; 40 ; "11000 a 12000 BTUS"
+											;  SPLIT_17000_18000 		; "17000-18000-btus" 	; 40 ; "17000 a 18000 BTUS"
+											;  SPLIT_22000_24000 		; "22000-24000-btus" 	; 40 ; "22000 a 24000 BTUS"
+											;  SPLIT_27000_32000 		; "27000-32000-btus" 	; 40 ; "27000 a 32000 BTUS"
+																	
+											;  SPLIT_ELECTROLUX  			; "electrolux"
+											;  SPLIT_CONSUL      			; "consul"
+											;  SPLIT_GREE        			; "gree"
+											;  SPLIT_SPRINGER_MIDEA		; "springer-midea"
+											;  SPLIT_FONTAINE    			; "fontaine"
+											;  SPLIT_AGRATTO     			; "agratto"
+											;  SPLIT_RINETTO     			; "rinetto"
+											;  SPLIT_COMFEE      			; "comfee"
+									
+											;  CORTINA_DE_AR_SPRINGER	; "springer"
+											;  CORTINA_DE_AR_AGRATTO 	; "agratto"
+											;  CORTINA_DE_AR_ELGIN		; "elgin"
+
+											;  CORTINA_DE_AR_90CM		; "90cm" 	; 40 ; "90cm"
+											;  CORTINA_DE_AR_120CM	; "120cm" ; 40 ; "120cm"
+											;  CORTINA_DE_AR_150CM	; "150cm" ; 40 ; "150cm"
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'MARCAS']
+																				;  AGRATTO            		;
+																				;  CARRIER            		;
+																				;  COMFEE             		;
+																				;  CONSUL             		;
+																				;  DAIKIN             		;
+																				;  DELONGHI           		;
+																				;  ELECTROLUX         		;
+																				;  FONTAINE           		;
+																				;  FUJITSU            		;
+																				;  GREE               		;
+																				;  HITACHI            		;
+																				;  KOMECO             		;
+																				;  LG                 		;
+																				;  MIDEA              		;
+																				;  RINETTO            		;
+																				;  SAMSUNG            		;
+																				;  SPRINGER           		;
+																				;  SPRINGER_MIDEA     		;
+																				;  TRANE              		;
+																				;  ELGIN              		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'NAV_AR_CONDICIONADO']
-                                      	;  CASSETE          		; 
-                     			;  INVERTER         		; 
-                      			;  JANELA             		; 
-                      			;  MULTI_SPLIT        		; 
-                      			;  PISO_TETO          		; 
-                      			;  PORTATIL           		; 
-                      			;  SPLIT              		; 
-                      			;  CORTINA_DE_AR      		;
+                                      	;  CASSETE          			; 
+                     										;  INVERTER         			; 
+																				;  JANELA             		; 
+																				;  MULTI_SPLIT        		; 
+																				;  PISO_TETO          		; 
+																				;  PORTATIL           		; 
+																				;  SPLIT              		; 
+																				;  CORTINA_DE_AR      		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'AR_CONDICIONADO']
-		                     	;  CASSETE            		; 
-                      			;  INVERTER           		; 
-                     			;  JANELA             		; 
-		                        ;  MULTI_SPLIT        		; 
-                   			;  PISO_TETO          		; 
-			                ;  PORTATIL           		; 
-			                ;  SPLIT              		; 
-			                ;  CORTINA_DE_AR      		;                      
+		                     								;  CASSETE            		; 
+																				;  INVERTER           		; 
+																				;  JANELA             		; 
+																				;  MULTI_SPLIT        		; 
+																				;  PISO_TETO          		; 
+																				;  PORTATIL           		; 
+																				;  SPLIT              		; 
+																				;  CORTINA_DE_AR      		;                      
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' SPLIT']
-                                      	;  SPLIT_7000_8500   		;
-					;  SPLIT_9000_10500  		;
-					;  SPLIT_11000_12000 		;
-                                        ;  SPLIT_17000_18000 		;
-                                        ;  SPLIT_22000_24000 		;
-					;  SPLIT_27000_32000 		;
+																				;  SPLIT_7000_8500   		;
+																				;  SPLIT_9000_10500  		;
+																				;  SPLIT_11000_12000 		;
+																				;  SPLIT_17000_18000 		;
+																				;  SPLIT_22000_24000 		;
+																				;  SPLIT_27000_32000 		;
 
-					;  SPLIT_ELECTROLUX  		;
-					;  SPLIT_CONSUL      		;
-					;  SPLIT_GREE        		;
-					;  SPLIT_SPRINGER_MIDEA		;
-					;  SPLIT_FONTAINE    		;
-					;  SPLIT_AGRATTO     		;
-					;  SPLIT_RINETTO     		;
-					;  SPLIT_COMFEE      		;
+																				;  SPLIT_ELECTROLUX  		;
+																				;  SPLIT_CONSUL      		;
+																				;  SPLIT_GREE        		;
+																				;  SPLIT_SPRINGER_MIDEA		;
+																				;  SPLIT_FONTAINE    		;
+																				;  SPLIT_AGRATTO     		;
+																				;  SPLIT_RINETTO     		;
+																				;  SPLIT_COMFEE      		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' INVERTER']
-					;  INVERTER_9000_10500  	;
-					;  INVERTER_11000_12000 	;
-					;  INVERTER_17000_18000 	;
-					;  INVERTER_22000_24000 	;
-					;  INVERTER_27000_32000 	;
-                                           
-					;  INVERTER_CONSUL      	;
-					;  INVERTER_LG          	;
-					;  INVERTER_DAIKIN      	;
-					;  INVERTER_FUJITSU     	;
-					;  INVERTER_SPRINGER_MIDEA	;
-					;  INVERTER_SAMSUNG     	;
-					;  INVERTER_AGRATTO     	;
-					;  INVERTER_TRANE       	;
-					;  INVERTER_GREE        	;
+																				;  INVERTER_9000_10500  	;
+																				;  INVERTER_11000_12000 	;
+																				;  INVERTER_17000_18000 	;
+																				;  INVERTER_22000_24000 	;
+																				;  INVERTER_27000_32000 	;
+																																				
+																				;  INVERTER_CONSUL      	;
+																				;  INVERTER_LG          	;
+																				;  INVERTER_DAIKIN      	;
+																				;  INVERTER_FUJITSU     	;
+																				;  INVERTER_SPRINGER_MIDEA	;
+																				;  INVERTER_SAMSUNG     	;
+																				;  INVERTER_AGRATTO     	;
+																				;  INVERTER_TRANE       	;
+																				;  INVERTER_GREE        	;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' CASSETE']
-					;  CASSETE_17000_18000 		;
-					;  CASSETE_22000_24000 		;
-					;  CASSETE_27000_32000 		;
-					;  CASSETE_33000_36000 		;
-					;  CASSETE_42000_46000 		;
-					;  CASSETE_47000_50000 		;
-					;  CASSETE_52000_60000 		;
-                      
-					;  CASSETE_DAIKIN      		;
-					;  CASSETE_ELGIN       		;
-					;  CASSETE_FUJITSU     		;
-					;  CASSETE_CARRIER     		;
-					;  CASSETE_TRANE       		;
-					;  CASSETE_LG          		;
+																				;  CASSETE_17000_18000 		;
+																				;  CASSETE_22000_24000 		;
+																				;  CASSETE_27000_32000 		;
+																				;  CASSETE_33000_36000 		;
+																				;  CASSETE_42000_46000 		;
+																				;  CASSETE_47000_50000 		;
+																				;  CASSETE_52000_60000 		;
+																										
+																				;  CASSETE_DAIKIN      		;
+																				;  CASSETE_ELGIN       		;
+																				;  CASSETE_FUJITSU     		;
+																				;  CASSETE_CARRIER     		;
+																				;  CASSETE_TRANE       		;
+																				;  CASSETE_LG          		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' JANELA']
-					;  JANELA_7000_8500   		;
-					;  JANELA_9000_10500  		;
-					;  JANELA_11000_12000 		;
-					;  JANELA_17000_18000 		;
-					;  JANELA_22000_24000 		;
-					;  JANELA_27000_32000 		;
-                      
-					;  JANELA_CONSUL         	; 
-					;  JANELA_SPRINGER_MIDEA 	; 
-					;  JANELA_ELECTROLUX     	; 
-					;  JANELA_FONTAINE       	; 
-					;  JANELA_SPRINGER       	; 
+																				;  JANELA_7000_8500   		;
+																				;  JANELA_9000_10500  		;
+																				;  JANELA_11000_12000 		;
+																				;  JANELA_17000_18000 		;
+																				;  JANELA_22000_24000 		;
+																				;  JANELA_27000_32000 		;
+																										
+																				;  JANELA_CONSUL         	; 
+																				;  JANELA_SPRINGER_MIDEA 	; 
+																				;  JANELA_ELECTROLUX     	; 
+																				;  JANELA_FONTAINE       	; 
+																				;  JANELA_SPRINGER       	; 
        
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' MULTI_SPLIT']
-					;  MULTI_SPLIT_BI_SPLIT    	;
-					;  MULTI_SPLIT_TRI_SPLIT   	;
-					;  MULTI_SPLIT_QUADRI_SPLIT 	;
+																				;  MULTI_SPLIT_BI_SPLIT    	;
+																				;  MULTI_SPLIT_TRI_SPLIT   	;
+																				;  MULTI_SPLIT_QUADRI_SPLIT 	;
 
-					;  MULTI_SPLIT_DAIKIN      	;
-					;  MULTI_SPLIT_FUJITSU     	;
-					;  MULTI_SPLIT_SAMSUNG     	;
-					;  MULTI_SPLIT_SPRINGER_MIDEA	;
-					;  MULTI_SPLIT_LG          	;
+																				;  MULTI_SPLIT_DAIKIN      	;
+																				;  MULTI_SPLIT_FUJITSU     	;
+																				;  MULTI_SPLIT_SAMSUNG     	;
+																				;  MULTI_SPLIT_SPRINGER_MIDEA	;
+																				;  MULTI_SPLIT_LG          	;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' PISO_TETO']
-					;  PISO_TETO_17000_18000 	;
-					;  PISO_TETO_22000_24000 	;
-					;  PISO_TETO_27000_32000 	;
-					;  PISO_TETO_33000_36000 	;
-					;  PISO_TETO_42000_46000 	;
-					;  PISO_TETO_47000_50000 	;
-					;  PISO_TETO_52000_60000 	;
-					;  PISO_TETO_80000       	;
+																				;  PISO_TETO_17000_18000 	;
+																				;  PISO_TETO_22000_24000 	;
+																				;  PISO_TETO_27000_32000 	;
+																				;  PISO_TETO_33000_36000 	;
+																				;  PISO_TETO_42000_46000 	;
+																				;  PISO_TETO_47000_50000 	;
+																				;  PISO_TETO_52000_60000 	;
+																				;  PISO_TETO_80000       	;
 
-					;  PISO_TETO_ELGIN       	;
-					;  PISO_TETO_CARRIER     	;
-					;  PISO_TETO_FUJITSU     	;
-					;  PISO_TETO_KOMECO      	;
-					;  PISO_TETO_LG          	;
-					;  PISO_TETO_SPRINGER    	;
-					;  PISO_TETO_TRANE       	;
-					;  PISO_TETO_GREE	 	;
+																				;  PISO_TETO_ELGIN       	;
+																				;  PISO_TETO_CARRIER     	;
+																				;  PISO_TETO_FUJITSU     	;
+																				;  PISO_TETO_KOMECO      	;
+																				;  PISO_TETO_LG          	;
+																				;  PISO_TETO_SPRINGER    	;
+																				;  PISO_TETO_TRANE       	;
+																				;  PISO_TETO_GREE	 				;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' PORTATIL']
-					;  PORTATIL_11000_12000 	;
-       
-					;  PORTATIL_AGRATTO 		;
+																				;  PORTATIL_11000_12000 	;
+																		
+																				;  PORTATIL_AGRATTO 		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = ' CORTINA_DE_AR']
-					;  CORTINA_DE_AR_SPRINGER	;
-					;  CORTINA_DE_AR_AGRATTO 	;
-					;  CORTINA_DE_AR_ELGIN		;
+																				;  CORTINA_DE_AR_SPRINGER	;
+																				;  CORTINA_DE_AR_AGRATTO 	;
+																				;  CORTINA_DE_AR_ELGIN		;
 
-					;  CORTINA_DE_AR_90CM		;
-					;  CORTINA_DE_AR_120CM		;
-					;  CORTINA_DE_AR_150CM		;
+																				;  CORTINA_DE_AR_90CM		;
+																				;  CORTINA_DE_AR_120CM		;
+																				;  CORTINA_DE_AR_150CM		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'SERVICOS']
-					; INSTALACAO			;
-					; LIMPEZA			;
+																				; INSTALACAO	;
+																				; LIMPEZA			;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'NAV_SERVICOS']
-					; INSTALACAO			;
-					; LIMPEZA			;
+																				; INSTALACAO	;
+																				; LIMPEZA			;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'LIMPEZA']
                                       	; LIMPEZA_SPLIT			;
-					; LIMPEZA_INVERTER		;
-					; LIMPEZA_MULTI_SPLIT		;	 
-					; LIMPEZA_PISO_TETO		; 
-					; LIMPEZA_CASSETE		; 
-					; LIMPEZA_CORTINA_DE_AR		;
+																				; LIMPEZA_INVERTER		;
+																				; LIMPEZA_MULTI_SPLIT		;	 
+																				; LIMPEZA_PISO_TETO		; 
+																				; LIMPEZA_CASSETE		; 
+																				; LIMPEZA_CORTINA_DE_AR		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'INSTALACAO']
-                                      	; INSTALACAO_SPLIT		;
-					; INSTALACAO_INVERTER		;
-					; INSTALACAO_MULTI_SPLIT	;	 
-					; INSTALACAO_PISO_TETO		; 
-					; INSTALACAO_CASSETE		; 
-					; INSTALACAO_CORTINA_DE_AR	;
+																				; INSTALACAO_SPLIT		;
+																				; INSTALACAO_INVERTER		;
+																				; INSTALACAO_MULTI_SPLIT	;	 
+																				; INSTALACAO_PISO_TETO		; 
+																				; INSTALACAO_CASSETE		; 
+																				; INSTALACAO_CORTINA_DE_AR	;

@@ -160,13 +160,18 @@
         }
       }
 
-      // Supercategorias por categorias
+      // Supercategorias por fabricante/marca
       if (
-        isset($arrayClassificationsByCategories[$product['cod_cat']][$product['fabCodigo']]) and
-        !empty($arrayClassificationsByCategories[$product['cod_cat']][$product['fabCodigo']])
+        isset($arrayBrandsByCategories[$product['cod_cat']][$product['fabCodigo']]) and
+        !empty($arrayBrandsByCategories[$product['cod_cat']][$product['fabCodigo']])
       ) {
-        $superCategories[] = trim($arrayClassificationsByCategories[$product['cod_cat']][$product['fabCodigo']]);
+        $superCategories[] = trim($arrayBrandsByCategories[$product['cod_cat']][$product['fabCodigo']]);
       }
+
+      // Supercategorias por categorias
+      if (isset($arrayBrandsClassifications[$product['fabCodigo']]) and !empty($arrayBrandsClassifications[$product['fabCodigo']])) {
+        $superCategories[] = trim($arrayBrandsClassifications[$product['fabCodigo']]);
+      }      
 
       if (count($superCategories) >= 2) {
         $superCategoriesStaged = '';

@@ -220,25 +220,9 @@ $arrayClassificationsByBtus = array(
 );
 
 /*
-100	Consul
-103	LG
-104	Fujitsu
-119	Elgin
-120	Electrolux
-125	Samsung
-126	Gree
-128	Carrier
-129	Springer
-142	Rinetto
-145	Daikin
-146	Springer Midea
-147	Fontaine
-148	Agratto
-149	Trane
-150	Comfee
-152	Komeco
+  Brands Supercategories
  */
-$arrayClassificationsByCategories = array(
+$arrayBrandsByCategories = array(
   63 => array( // Split
     120 => 'SPLIT_ELECTROLUX',
     100 => 'SPLIT_CONSUL',
@@ -304,6 +288,29 @@ $arrayClassificationsByCategories = array(
   98 => array( // Portátil
     148  => 'PORTATIL_AGRATTO'
   )
+);
+
+$arrayBrandsClassifications = array (
+  100 => 'CONSUL',
+  103 => 'LG',
+  104 => 'FUJITSU',
+  119 => 'ELGIN',
+  120 => 'ELECTROLUX',
+  125 => 'SAMSUNG',
+  126 => 'GREE',
+  128 => 'CARRIER',
+  129 => 'Springer',
+  142 => 'RINETTO',
+  145 => 'DAIKIN',
+  146 => 'SPRINGER_MIDEA',
+  147 => 'FONTAINE',
+  148 => 'AGRATTO',
+  149 => 'TRANE',
+  150 => 'COMFEE',
+  152 => 'KOMECO',
+  127 => 'DELONGHI',
+  102 => 'HITACHI',
+  141 => 'MIDEA'
 );
 
 /**

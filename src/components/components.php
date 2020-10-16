@@ -45,7 +45,7 @@
         $componentName = 'Evaporadora'; 
         $componentCode = 'Evaporadora_' . $product['cod_pro'];
         if ($product['numberOfComponents'] > 1) {
-          $componentName .= '_' . ($cont+1);
+          $componentName .= ' ' . ($cont+1);
           $componentCode .= '_' . ($cont+1);
         }
 
