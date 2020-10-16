@@ -1,22 +1,30 @@
 <?php
   echo "\n2 - Exportando as Informações dos Componentes....";
 
-  $fileComponent  = fopen(CSV_PATH.$filesNames[2]['csv'][0].'.csv', 'wr');
-  $fileProduct    = fopen(CSV_PATH.$filesNames[2]['csv'][1].'.csv', 'wr');
+  $fileComponent   = fopen(CSV_PATH.$filesNames[2]['csv'][0].'.csv', 'wr');
+  $fileAttributes  = fopen(CSV_PATH.$filesNames[2]['csv'][1].'.csv', 'wr');
+  $fileProduct     = fopen(CSV_PATH.$filesNames[2]['csv'][2].'.csv', 'wr');
 
   // Exportando as colunas Bases dos Componentes
   $componentscolumns = array(
     '# code', 
     'name', 
     'componentType',
-    'supercategories'
+    'supercategories',
+    'approvalstatus',
+    'catalogVersion'
+  );
+  fwrite($fileComponent, implode(";", $componentscolumns) . "\n");
+
+  // Exportando as colunas Bases dos Atributos dos Componentes
+  $productComponentsAttributesColumns = array(
+    '# code'
   );
   foreach ($evaporatorOrder[1] as $fieldKey => $fieldValue) {
-    array_push($componentscolumns, $fieldValue);
+    array_push($productComponentsAttributesColumns, $fieldValue);
   } 
-  array_push($componentscolumns, 'approvalstatus'); 
-  array_push($componentscolumns, 'catalogVersion'); 
-  fwrite($fileComponent, implode(";", $componentscolumns) . "\n");
+  array_push($productComponentsAttributesColumns, 'catalogVersion'); 
+  fwrite($fileAttributes, implode(";", $productComponentsAttributesColumns) . "\n");
 
   // Exportando as colunas Bases dos Produtos
   $productComponentsColumns = array(
@@ -24,7 +32,7 @@
     'components',
     'catalogVersion'
   );
-  fwrite($fileProduct, implode(";", $productComponentsColumns) . "\n");  
+  fwrite($fileProduct, implode(";", $productComponentsColumns) . "\n");
 
   // Exportando os dados dos produtos
   foreach ($products as $key => $product) {
@@ -66,7 +74,19 @@
           'ESPECIFICACOES_TECNICAS:centralArClassificationCatalog:1.0' 
         );
 
+        // Staged and Online Components
+        $componentStaged   = $componentsColumnsRows;
+        $componentOnline   = $componentsColumnsRows;
+        $componentStaged[] = 'approved';
+        $componentStaged[] = 'centralArProductCatalog:Staged';    
+        $componentOnline[] = 'approved';
+        $componentOnline[] = 'centralArProductCatalog:Online';
+        fwrite($fileComponent, implode(";", $componentStaged) . "\n");
+        fwrite($fileComponent, implode(";", $componentOnline) . "\n");
+
+        // Atributos
         $attributesValuesArray = array();
+        $componentsAttributesColumnsRows = array($componentCode);
         foreach ($evaporatorOrder[($cont+1)] as $fieldKey => $fieldValue) {
           // Descrição do produto para a chave
           if(isset($product['descriptionFields'][$fieldKey]) and !empty($product['descriptionFields'][$fieldKey]['value'])) {
@@ -101,17 +121,16 @@
           }
         }      
 
-        $componentsColumnsRows = array_merge($componentsColumnsRows,$attributesValuesArray);
+        $componentsAttributesColumnsRows = array_merge($componentsAttributesColumnsRows,$attributesValuesArray);
 
-        // Staged and Online Product
-        $componentStaged   = $componentsColumnsRows;
-        $componentOnline   = $componentsColumnsRows;
-        $componentStaged[] = 'approved';
+        // Staged and Online Attributs
+        $componentStaged   = $componentsAttributesColumnsRows;
+        $componentOnline   = $componentsAttributesColumnsRows;
         $componentStaged[] = 'centralArProductCatalog:Staged';    
-        $componentOnline[] = 'approved';
         $componentOnline[] = 'centralArProductCatalog:Online';
-        fwrite($fileComponent, implode(";", $componentStaged) . "\n");
-        fwrite($fileComponent, implode(";", $componentOnline) . "\n");
+        fwrite($fileAttributes, implode(";", $componentStaged) . "\n");
+        fwrite($fileAttributes, implode(";", $componentOnline) . "\n");
+
       }             
     }
 
@@ -147,5 +166,6 @@
   }
 
   fclose($fileComponent);
-  fclose($fileProduct);
+  fclose($fileAttributes);
+  fclose($fileProduct);  
 ?>

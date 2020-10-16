@@ -20,7 +20,7 @@
     ),
     2 => array(
       'impex' => 'ProductsComponents',
-      'csv'   => array('ComponentProduct', 'CentralArProductComponents')
+      'csv'   => array('ComponentProduct', 'ComponentProductAttributes', 'CentralArProductComponents')
     )
   );
 
