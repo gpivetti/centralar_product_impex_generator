@@ -6,7 +6,7 @@
   include_once __DIR__.'/config/products/functions.php';
   include_once __DIR__.'/config/products/classes.php';
 
-  if (isset($array_parameters['sku']) and !empty($array_parameters['sku']) and is_numeric($array_parameters['sku'])) {
+  if (isset($array_parameters['sku']) and !empty($array_parameters['sku'])) {
     $productParameters = $array_parameters['sku'];
   }
   else {
@@ -69,13 +69,10 @@
                   left join url u on u.nivel = "prod" and u.id_nivel = p.cod_pro
                   left join sub_categoria sc on sc.cod_sub = p.cod_sub 
           where	  p.cod_pro in ('.$productParameters.')
-                  and not p.cod_cat in (50000)
-                  and not exists (
-                    select skus from produtos_outlet po where po.skus = p.cod_pro 
-                  )';
+                  and not p.cod_cat in (50000)';
   $db->query($sql);
   $rowProdutos = $db->multiple();
-  foreach($rowProdutos as $rowKey => $rowProduto) {   
+  foreach($rowProdutos as $rowKey => $rowProduto) { 
     $rowProduto = (array) $rowProduto;
 
     // Atributos do Produto

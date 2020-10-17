@@ -82,7 +82,7 @@
         $componentOnline[] = 'approved';
         $componentOnline[] = 'centralArProductCatalog:Online';
         fwrite($fileComponent, implode(";", $componentStaged) . "\n");
-        fwrite($fileComponent, implode(";", $componentOnline) . "\n");
+        // fwrite($fileComponent, implode(";", $componentOnline) . "\n");
 
         // Atributos
         $attributesValuesArray = array();
@@ -129,7 +129,7 @@
         $componentStaged[] = 'centralArProductCatalog:Staged';    
         $componentOnline[] = 'centralArProductCatalog:Online';
         fwrite($fileAttributes, implode(";", $componentStaged) . "\n");
-        fwrite($fileAttributes, implode(";", $componentOnline) . "\n");
+        // fwrite($fileAttributes, implode(";", $componentOnline) . "\n");
 
       }             
     }
@@ -161,7 +161,7 @@
         $productsComponentsArrayOnline,
         'centralArProductCatalog:Online',
       );
-      fwrite($fileProduct, implode(";", $productComponentsColumnsOnlineRows) . "\n");
+      // fwrite($fileProduct, implode(";", $productComponentsColumnsOnlineRows) . "\n");
     }
   }
 

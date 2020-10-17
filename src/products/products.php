@@ -11,6 +11,7 @@
     'name',
     'alternateName',
     'componentProductType',
+    'description',
     'descriptionLongVerum',
     'descriptionShortVerum',
     'primaryImage',
@@ -71,7 +72,8 @@
       trim($product['nom_pro']),
       $condType,
       trim(preg_replace("/\r|\n/", " ", $product['des_pro'])),
-      trim(preg_replace("/\r|\n/", " ", $product['description'])),
+      trim(preg_replace("/\r|\n/", " ", $product['des_pro'])),
+      trim($product['nom_pro']),
       $primaryImage,
       $primaryImage,
       $otherImages,
@@ -126,7 +128,7 @@
     $productOnline[] = 'approved';
     $productOnline[] = 'centralArProductCatalog:Online';
     fwrite($file, implode(";", $productStaged) . "\n");
-    fwrite($file, implode(";", $productOnline) . "\n");
+    // fwrite($file, implode(";", $productOnline) . "\n");
     /**
      * ***********************************************************************
      * [END] PRODUCT
@@ -203,7 +205,7 @@
           $superCategoriesOnline,
           'centralArProductCatalog:Online'
         );
-        fwrite($fileSupercategories, implode(";", $supercategoriesColumnsOnlineRows) . "\n");
+        // fwrite($fileSupercategories, implode(";", $supercategoriesColumnsOnlineRows) . "\n");
       }
     }
     /**
