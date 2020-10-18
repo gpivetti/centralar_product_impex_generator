@@ -64,6 +64,19 @@
       }
     }
 
+    // Resumo do Produtos (Description)
+    $productDescription = '';
+    // if (count($product['resumeFields']) > 0) {
+    //   $productDescription .= '<div>';
+    //   foreach ($product['resumeFields'] as $resumeKey => $resumeValue) {
+    //     $productDescription .= '<div>';
+    //     $productDescription .= '<h6 style="font-size: 14px; font-weight: bold; margin-bottom: 7px;">' . trim($resumeValue['title']) . '</h6>';
+    //     $productDescription .= '<p style="margin-bottom: 20px;">' . trim(preg_replace("/\r|\n/", " ", $resumeValue['value'])) . '</p>';
+    //     $productDescription .= '</div>';
+    //   }
+    //   $productDescription .= '</div>';
+    // }
+    // echo "\n".$productDescription."\n";
     // Dados bases do Produto
     $productsColumnsRows = array(
       $product['cod_pro'],
@@ -71,7 +84,7 @@
       trim($product['nom_pro']),
       trim($product['nom_pro']),
       $condType,
-      trim(preg_replace("/\r|\n/", " ", $product['des_pro'])),
+      trim($productDescription),
       trim(preg_replace("/\r|\n/", " ", $product['des_pro'])),
       trim($product['nom_pro']),
       $primaryImage,

@@ -90,6 +90,20 @@
         'value' => $obj->valor
       );
     }   
+
+    // Descrições (Resumo) do Produto
+    $rowProduto['resumeFields'] = array();
+    $sqlResumo = 'select titulo, valor from mds_produto_descricao p where p.cod_pro = '.$rowProduto['cod_pro'].' order by p.ordem';
+    $db->query($sqlResumo);
+    $resumo = $db->multiple();    
+    foreach($resumo as $item => $obj) {  
+      if (!empty($obj->titulo) and !empty($obj->valor)) {    
+        $rowProduto['resumeFields'][] = array(
+          'title' => $obj->titulo,
+          'value' => $obj->valor
+        );
+      }
+    }  
     
     // Images			
     $rowProduto['images'] = array();
