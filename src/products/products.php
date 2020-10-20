@@ -98,9 +98,10 @@
     if (count($product['descriptionFields']) > 0) {      
       foreach ($condenserOrder as $fieldKey => $fieldValue) {
         // Descrição do produto para a chave
-        if(isset($product['descriptionFields'][$fieldKey]) and !empty($product['descriptionFields'][$fieldKey]['value'])) {
-          $measurementUnity = $product['descriptionFields'][$fieldKey]['unity'];
-          $descriptionValue = $product['descriptionFields'][$fieldKey]['value'];
+        $keyOfField = getValueByRepeatedColumn($fieldKey);
+        if(isset($product['descriptionFields'][$keyOfField]) and !empty($product['descriptionFields'][$keyOfField]['value'])) {
+          $measurementUnity = $product['descriptionFields'][$keyOfField]['unity'];
+          $descriptionValue = $product['descriptionFields'][$keyOfField]['value'];
         }
         else {
           $measurementUnity = '';

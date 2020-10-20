@@ -40,25 +40,25 @@
 
     // Atributos e descrições ténicas  
     if (count($product['descriptionFields']) > 0) {      
-      for ($cont = 0 ; $cont < $product['numberOfComponents'] ; $cont++) {
+      for ($cont = 1 ; $cont <= $product['numberOfComponents'] ; $cont++) {
         // Códigos do Componentes
         $componentName = 'Evaporadora'; 
         $componentCode = 'Evaporadora_' . $product['cod_pro'];
         if ($product['numberOfComponents'] > 1) {
-          $componentName .= ' ' . ($cont+1);
-          $componentCode .= '_' . ($cont+1);
+          $componentName .= ' ' . $cont;
+          $componentCode .= '_' . $cont;
         }
 
         // componentes
         $productsComponentsArray[] = $componentCode;
   
         $evapType = '';
-        if ($cont == 0) {
+        if ($cont == 1) {
           if (isset($evaporatorComponentType[$product['id_evaporizadora']])) {
             $evapType = $evaporatorComponentType[$product['id_evaporizadora']];
           }
         } else {
-          $evapCodeColumn = 'id_evaporizadora_' . ($cont + 1);
+          $evapCodeColumn = 'id_evaporizadora_' . $cont;
           if (isset($product[$evapCodeColumn]) and !empty($product[$evapCodeColumn])) {
             if (isset($evaporatorComponentType[$product[$evapCodeColumn]])) {
               $evapType = $evaporatorComponentType[$evapCodeColumn];
@@ -87,7 +87,7 @@
         // Atributos
         $attributesValuesArray = array();
         $componentsAttributesColumnsRows = array($componentCode);
-        foreach ($evaporatorOrder[($cont+1)] as $fieldKey => $fieldValue) {
+        foreach ($evaporatorOrder[$cont] as $fieldKey => $fieldValue) {
           // Descrição do produto para a chave
           if(isset($product['descriptionFields'][$fieldKey]) and !empty($product['descriptionFields'][$fieldKey]['value'])) {
             $measurementUnity = $product['descriptionFields'][$fieldKey]['unity'];
@@ -114,8 +114,8 @@
         }
 
         // Atributos que faltarão ficaram vazios
-        if (count($attributesValuesArray) < count($evaporatorOrder[($cont+1)])) {
-          $attrbituesRemaining = count($evaporatorOrder[($cont+1)]) - count($attributesValuesArray);
+        if (count($attributesValuesArray) < count($evaporatorOrder[$cont])) {
+          $attrbituesRemaining = count($evaporatorOrder[$cont]) - count($attributesValuesArray);
           for ($contRemaining = 0 ; $contRemaining < $attrbituesRemaining ; $contRemaining++) {
             $attributesValuesArray[] = '';
           }

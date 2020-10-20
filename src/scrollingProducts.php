@@ -14,7 +14,8 @@
     $db->query($sqlCaracteristicas);
     $caracteristicas = $db->multiple();    
     foreach($caracteristicas as $item => $obj) {
-      if ($obj->descricao_dimensao == 'S') {
+      if ($obj->descricao_dimensao == 'S' and is_numeric($obj->valor)) {
+        $obj->valor = (float) $obj->valor;
         $valor = round($obj->valor/10, 2);
       }
       else {
