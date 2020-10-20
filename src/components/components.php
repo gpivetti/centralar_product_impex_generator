@@ -78,9 +78,9 @@
         $componentStaged   = $componentsColumnsRows;
         $componentOnline   = $componentsColumnsRows;
         $componentStaged[] = 'approved';
-        $componentStaged[] = 'centralArProductCatalog:Staged';    
+        $componentStaged[] = PRODUCT_CATALOG.':Staged';    
         $componentOnline[] = 'approved';
-        $componentOnline[] = 'centralArProductCatalog:Online';
+        $componentOnline[] = PRODUCT_CATALOG.':Online';
         fwrite($fileComponent, implode(";", $componentStaged) . "\n");
         // fwrite($fileComponent, implode(";", $componentOnline) . "\n");
 
@@ -126,8 +126,8 @@
         // Staged and Online Attributs
         $componentStaged   = $componentsAttributesColumnsRows;
         $componentOnline   = $componentsAttributesColumnsRows;
-        $componentStaged[] = 'centralArProductCatalog:Staged';    
-        $componentOnline[] = 'centralArProductCatalog:Online';
+        $componentStaged[] = ''.PRODUCT_CATALOG.':Staged';    
+        $componentOnline[] = ''.PRODUCT_CATALOG.':Online';
         fwrite($fileAttributes, implode(";", $componentStaged) . "\n");
         // fwrite($fileAttributes, implode(";", $componentOnline) . "\n");
 
@@ -143,15 +143,15 @@
           $productsComponentsArrayStaged .= ',';
           $productsComponentsArrayOnline .= ',';
         }
-        $productsComponentsArrayStaged .= trim($valueComponent) . ':centralArProductCatalog:Staged';
-        $productsComponentsArrayOnline .= trim($valueComponent) . ':centralArProductCatalog:Online';
+        $productsComponentsArrayStaged .= trim($valueComponent) . ':'.PRODUCT_CATALOG.':Staged';
+        $productsComponentsArrayOnline .= trim($valueComponent) . ':'.PRODUCT_CATALOG.':Online';
       }
 
       // Staged
       $productComponentsColumnsStagedRows = array(
         $product['cod_pro'],
         $productsComponentsArrayStaged,
-        'centralArProductCatalog:Staged',
+        PRODUCT_CATALOG.':Staged',
       );
       fwrite($fileProduct, implode(";", $productComponentsColumnsStagedRows) . "\n");
 
@@ -159,7 +159,7 @@
       $productComponentsColumnsOnlineRows = array(
         $product['cod_pro'],
         $productsComponentsArrayOnline,
-        'centralArProductCatalog:Online',
+        PRODUCT_CATALOG.':Online',
       );
       // fwrite($fileProduct, implode(";", $productComponentsColumnsOnlineRows) . "\n");
     }

@@ -109,7 +109,7 @@ $evaporatorOrder = array(
     29           => '@COLOR',
     67           => '@WIDTH',
     63           => '@HEIGHT',
-    70           => '@DEPTH',
+    71             => '@DEPTH',
     '75>1'       => '@NET_WEIGHT',
     '75>2'       => '@GROSS_WEIGHT'
   )

@@ -66,17 +66,17 @@
 
     // Resumo do Produtos (Description)
     $productDescription = '';
-    // if (count($product['resumeFields']) > 0) {
-    //   $productDescription .= '<div>';
-    //   foreach ($product['resumeFields'] as $resumeKey => $resumeValue) {
-    //     $productDescription .= '<div>';
-    //     $productDescription .= '<h6 style="font-size: 14px; font-weight: bold; margin-bottom: 7px;">' . trim($resumeValue['title']) . '</h6>';
-    //     $productDescription .= '<p style="margin-bottom: 20px;">' . trim(preg_replace("/\r|\n/", " ", $resumeValue['value'])) . '</p>';
-    //     $productDescription .= '</div>';
-    //   }
-    //   $productDescription .= '</div>';
-    // }
-    // echo "\n".$productDescription."\n";
+    if (count($product['resumeFields']) > 0) {
+      $productDescription .= '"<div>';
+      foreach ($product['resumeFields'] as $resumeKey => $resumeValue) {
+        $productDescription .= '<div>';
+        $productDescription .= '<h6 style=""font-size: 14px; font-weight: bold; margin-bottom: 7px;"">' . trim(addslashes($resumeValue['title'])) . '</h6>';
+        $productDescription .= '<p style=""margin-bottom: 20px;"">' . trim(addslashes(preg_replace("/\r|\n/", " ", $resumeValue['value']))) . '</p>';
+        $productDescription .= '</div>';
+      }
+      $productDescription .= '</div>"';
+    }
+
     // Dados bases do Produto
     $productsColumnsRows = array(
       $product['cod_pro'],
@@ -137,9 +137,9 @@
     $productStaged = $productsColumnsRows;
     $productOnline = $productsColumnsRows;
     $productStaged[] = 'approved';
-    $productStaged[] = 'centralArProductCatalog:Staged';    
+    $productStaged[] = PRODUCT_CATALOG.':Staged';    
     $productOnline[] = 'approved';
-    $productOnline[] = 'centralArProductCatalog:Online';
+    $productOnline[] = PRODUCT_CATALOG.':Online';
     fwrite($file, implode(";", $productStaged) . "\n");
     // fwrite($file, implode(";", $productOnline) . "\n");
     /**
@@ -196,19 +196,19 @@
           if (!empty($superCategoriesStaged)) {
             $superCategoriesStaged .= ',';
           }
-          $superCategoriesStaged .= trim($value) . ':centralArProductCatalog:Staged';
+          $superCategoriesStaged .= trim($value) . ':'.PRODUCT_CATALOG.':Staged';
 
           if (!empty($superCategoriesOnline)) {
             $superCategoriesOnline .= ',';
           }
-          $superCategoriesOnline .= trim($value) . ':centralArProductCatalog:Online';          
+          $superCategoriesOnline .= trim($value) . ':'.PRODUCT_CATALOG.':Online';          
         }
 
         // Staged
         $supercategoriesColumnsStagedRows = array(
           $product['cod_pro'],
           $superCategoriesStaged,
-          'centralArProductCatalog:Staged'
+          PRODUCT_CATALOG.':Staged'
         );
         fwrite($fileSupercategories, implode(";", $supercategoriesColumnsStagedRows) . "\n");
 
@@ -216,7 +216,7 @@
         $supercategoriesColumnsOnlineRows = array(
           $product['cod_pro'],
           $superCategoriesOnline,
-          'centralArProductCatalog:Online'
+          PRODUCT_CATALOG.':Online'
         );
         // fwrite($fileSupercategories, implode(";", $supercategoriesColumnsOnlineRows) . "\n");
       }

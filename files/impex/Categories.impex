@@ -15,20 +15,34 @@ $categories = target(code, $catalogVersion)[unique=true]
 $lang = pt
 
 # Create Categories
-INSERT_UPDATE Category; code[unique = true]; name[lang = $lang];  idVerum ; nameVerum ;  allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion;
-											; AR_E_VENTILACAO				; "Ar e Ventilacao" ; 10 ; "Ar e Ventilacao"
-                    	; AR_CONDICIONADO				; "Ar Condicionado" ; 20 ; "Ar Condicionado"
-											; DEPARTAMENTOS					; 
-	                		; NAV_AR_CONDICIONADO		; "ar-condicionado" ;
+INSERT_UPDATE Category; code[unique = true]				; name[lang = $lang]				; idVerum 	; nameVerum 								;  allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion;
+											; DEPARTAMENTOS							; 
+											; AR_E_VENTILACAO						; "Ar e Ventilacao" 				; 10 				; "Ar e Ventilacao"
+                    	; AR_CONDICIONADO						; "Ar Condicionado" 				; 20 				; "Ar Condicionado"
+	                		; NAV_AR_CONDICIONADO		 		; "ar-condicionado" 				;
+
+											; ELETRODOMESTICO				 		; "Eletrodomestico" 				; 10 				; "Eletrodomestico"
+											; GELADEIRA_REFRIGERADOR 		; "Geladeira/Refrigerador" 	; 20 				; "Geladeira/Refrigerador"
+											; FOGAO 										; "Fogao" 									; 20 				; "Fogao"
+											; FORNO_EMBUTIR 						; "Forno de Embutir" 				; 20 				; "Forno de Embutir"
+											; LAVA_LOUCAS 							; "Lava Loucas" 						; 20 				; "Lava Loucas"
+											; MAQUINA_LAVAR 						; "Maquina de Lavar" 				; 20 				; "Maquina de Lavar"
 
 
-INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'DEPARTAMENTOS']
+INSERT_UPDATE CategoryCategoryRelation	; $categories			; $supercategories[default = 'DEPARTAMENTOS']
                                     		; AR_E_VENTILACAO ;
+																				; ELETRODOMESTICO	;
 
 
-INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'AR_E_VENTILACAO']
+INSERT_UPDATE CategoryCategoryRelation	; $categories			; $supercategories[default = 'AR_E_VENTILACAO']
                                      		; AR_CONDICIONADO ;
 
+INSERT_UPDATE CategoryCategoryRelation	; $categories							; $supercategories[default = 'ELETRODOMESTICO']
+                                     		; GELADEIRA_REFRIGERADOR 	;
+																				; FOGAO 									;
+																				; FORNO_EMBUTIR 					;
+																				; LAVA_LOUCAS 						;
+																				; MAQUINA_LAVAR 					;
 
 INSERT_UPDATE Category; code[unique = true]			; name[lang = $lang]; idVerum ; nameVerum ; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion;
 											;  MARCAS             		; "marcas"
@@ -181,6 +195,53 @@ INSERT_UPDATE Category; code[unique = true]			; name[lang = $lang]; idVerum ; na
 											;  CORTINA_DE_AR_90CM		; "90cm" 	; 40 ; "90cm"
 											;  CORTINA_DE_AR_120CM	; "120cm" ; 40 ; "120cm"
 											;  CORTINA_DE_AR_150CM	; "150cm" ; 40 ; "150cm"
+
+											; GELADEIRA_REFRIGERADOR_DUPLEX 		; "Geladeira Duplex" 		; 30 ; "Duplex"
+											; GELADEIRA_REFRIGERADOR_UMA_PORTA 	; "Geladeira 1 Porta" 	; 30 ; "1 Porta"
+											; GELADEIRA_REFRIGERADOR_FRIGOBAR 	; "Frigobar" 						; 30 ; "Frigobar"
+											; GELADEIRA_REFRIGERADOR_CERVEJEIRA ; "Cervejeira" 					; 30 ; "Cervejeira"
+											; FOGAO_PISO 												; "Fogao de Piso" 			; 30 ; "Fogão de Piso"
+											; FORNO_EMBUTIR_ELETRICO 						; "Eletrico" 						; 30 ; "Eletrico"
+											; LAVA_LOUCAS_EMBUTIR 							; "Embutir" 						; 30 ; "Embutir"
+											; MAQUINA_LAVAR_AUTOMATICA 					; "Automatica" 					; 30 ; "Automatica"
+											; MAQUINA_LAVAR_EMBUTIR							; "Embutir" 						; 30 ; "Embutir"
+											
+											; DUPLEX_300_400 ; "300-400-litros" ; 40 ; "300 a 400 Litros" ;
+											; DUPLEX_300_400 ; "300-400-litros" ; 40 ; "300 a 400 Litros" ;
+											; DUPLEX_400_500 ; "400-500-litros" ; 40 ; "400 a 500 Litros" ;
+											; DUPLEX_500_600 ; "500-600-litros" ; 40 ; "500 a 600 Litros" ;
+
+											; GELADEIRA_REFRIGERADOR_UMA_PORTA_300_400 ; "300-400-litros" ; 40 ; "300 a 400 Litros" ;
+											; GELADEIRA_REFRIGERADOR_UMA_PORTA_300_400 ; "300-400-litros" ; 40 ; "300 a 400 Litros" ;
+											; GELADEIRA_REFRIGERADOR_UMA_PORTA_400_500 ; "400-500-litros" ; 40 ; "400 a 500 Litros" ;
+											; GELADEIRA_REFRIGERADOR_UMA_PORTA_500_600 ; "500-600-litros" ; 40 ; "500 a 600 Litros" ;											
+											
+											; FRIGOBAR_100 			; "100-litros" 			; 40 ; "Ate 100 Litros" ;
+											; FRIGOBAR_100_200 	; "100-200-litros" 	; 40 ; "100 a 200 Litros" ;
+											; FRIGOBAR_200_300 	; "200-300-litros" 	; 40 ; "300 a 300 Litros" ;
+											; FRIGOBAR_300_400 	; "300-400-litros" 	; 40 ; "300 a 400 Litros" ;
+
+											; CERVEJEIRA_100 			; "100-litros" 			; 40 ; "Ate 100 Litros" ;
+											; CERVEJEIRA_100_200 	; "100-200-litros" 	; 40 ; "100 a 200 Litros" ;
+
+											; FORNO_100 			; "100-litros" 			; 40 ; "Ate 100 Litros" ;
+											; FORNO_100_200 	; "100-200-litros" 	; 40 ; "100 a 200 Litros" ;
+											; FORNO_200_300 	; "200-300-litros" 	; 40 ; "300 a 300 Litros" ;
+
+											; FOGAO_2_BOCAS ; "fogao-2-bocas" ; 40 ; "Fogao 2 Bocas"
+											; FOGAO_3_BOCAS ; "fogao-3-bocas" ; 40 ; "Fogao 3 Bocas"
+											; FOGAO_4_BOCAS ; "fogao-4-bocas" ; 40 ; "Fogao 4 Bocas"
+											; FOGAO_5_BOCAS ; "fogao-5-bocas" ; 40 ; "Fogao 5 Bocas"
+											; FOGAO_6_BOCAS ; "fogao-6-bocas" ; 40 ; "Fogao 6 Bocas"
+											; FOGAO_8_BOCAS ; "fogao-8-bocas" ; 40 ; "Fogao 8 Bocas"
+
+											; LAVA_LOUCAS_8_SERVICOS	; "8-servicos" 	; 40 ; "8 Servicos" ;
+											; LAVA_LOUCAS_10_SERVICOS ; "10-servicos" ; 40 ; "10 Servicos" ;
+
+											; MAQUINA_LAVAR_14_SERVICOS	; "14-servicos" ; 40 ; "14 Servicos" ;
+
+											; MAQUINA_LAVAR_AUTOMATICA_12 ; "12-kg" 	; 40 ; "12Kg" ;
+											; MAQUINA_LAVAR_AUTOMATICA_16 ; "16-kg" 	; 40 ; "16Kg" ;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'MARCAS']
 																				;  AGRATTO            		;
@@ -355,3 +416,68 @@ INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default =
 																				; INSTALACAO_PISO_TETO		; 
 																				; INSTALACAO_CASSETE		; 
 																				; INSTALACAO_CORTINA_DE_AR	;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'GELADEIRA_REFRIGERADOR']
+																				; GELADEIRA_REFRIGERADOR_DUPLEX		;
+																				; GELADEIRA_REFRIGERADOR_UMA_PORTA		;
+																				; GELADEIRA_REFRIGERADOR_FRIGOBAR	;	 
+																				; GELADEIRA_REFRIGERADOR_CERVEJEIRA		; 
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'FOGAO']
+																				; FOGAO_PISO		;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'FORNO_EMBUTIR']
+																				; FORNO_EMBUTIR_ELETRICO		;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'LAVA_LOUCAS']
+																				; LAVA_LOUCAS_EMBUTIR		;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'MAQUINA_LAVAR']
+																				; MAQUINA_LAVAR_EMBUTIR			;
+																				; MAQUINA_LAVAR_AUTOMATICA	;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'GELADEIRA_REFRIGERADOR_DUPLEX']
+																				; DUPLEX_300_400	;
+																				; DUPLEX_300_400	;
+																				; DUPLEX_400_500	;	 
+																				; DUPLEX_500_600	; 
+											
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'GELADEIRA_REFRIGERADOR_UMA_PORTA']
+																				; GELADEIRA_REFRIGERADOR_UMA_PORTA_300_400	;
+																				; GELADEIRA_REFRIGERADOR_UMA_PORTA_300_400	;
+																				; GELADEIRA_REFRIGERADOR_UMA_PORTA_400_500	;	 
+																				; GELADEIRA_REFRIGERADOR_UMA_PORTA_500_600	; 
+											
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'GELADEIRA_REFRIGERADOR_FRIGOBAR']
+																				; FRIGOBAR_100			;
+																				; FRIGOBAR_100_200	;
+																				; FRIGOBAR_200_300	;	 
+																				; FRIGOBAR_300_400	; 
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'GELADEIRA_REFRIGERADOR_CERVEJEIRA']
+																				; CERVEJEIRA_100	;
+																				; CERVEJEIRA_100_200	;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'FOGAO_PISO']
+																				; FOGAO_2_BOCAS	;
+																				; FOGAO_3_BOCAS	;
+																				; FOGAO_4_BOCAS ;
+																				; FOGAO_5_BOCAS ;
+																				; FOGAO_6_BOCAS ;
+																				; FOGAO_7_BOCAS ;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'FORNO_EMBUTIR_ELETRICO']
+																				; FORNO_100	;
+																				; FORNO_100_200	;
+																				; FORNO_200_300 ;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'LAVA_LOUCAS_EMBUTIR']
+																				; LAVA_LOUCAS_8_SERVICOS	;
+																				; LAVA_LOUCAS_10_SERVICOS	;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'MAQUINA_LAVAR_EMBUTIR']
+																				; MAQUINA_LAVAR_14_SERVICOS	;
+
+INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'MAQUINA_LAVAR_AUTOMATICA']
+																				; MAQUINA_LAVAR_AUTOMATICA_12	;
+																				; MAQUINA_LAVAR_AUTOMATICA_16	;

@@ -6,7 +6,7 @@
   include_once __DIR__.'/config/products/functions.php';
   include_once __DIR__.'/config/products/classes.php';
 
-  define('PRODUCT_CATALOG', 'centralArProductCatalog');
+  define('PRODUCT_CATALOG', 'centralArOutletProductCatalog');
 
   if (isset($array_parameters['sku']) and !empty($array_parameters['sku'])) {
     $productParameters = $array_parameters['sku'];
@@ -17,12 +17,12 @@
 
   $filesNames = array(
     1 => array(
-      'impex' => 'Products',
-      'csv'   => array('CentralArProduct', 'CentralArProductSupercategories')
+      'impex' => 'ProductsOutlet',
+      'csv'   => array('CentralArProductOutlet', 'CentralArProductSupercategoriesOutlet')
     ),
     2 => array(
-      'impex' => 'ProductsComponents',
-      'csv'   => array('ComponentProduct', 'ComponentProductAttributes', 'CentralArProductComponents')
+      'impex' => 'ProductsComponentsOutlet',
+      'csv'   => array('ComponentProductOutlet', 'ComponentProductAttributesOutlet', 'CentralArProductComponentsOutlet')
     )
   );
 
@@ -30,7 +30,8 @@
 
   echo "=> Pesquisando os Produtos";
 
-  // Pesquisa os Produtos  
+  // Pesquisa os Produtos
+  $products = array(); 
   $sql = 'select 	p.cod_pro,
                   p.nom_pro,
                   p.des_pro,
@@ -67,7 +68,7 @@
                   left join sub_categoria sc on sc.cod_sub = p.cod_sub 
           where	  p.cod_pro in ('.$productParameters.')
                   and not p.cod_cat in (50000)
-                  and not p.cod_pro in (
+                  and p.cod_pro in (
                   	select skus from produtos_outlet po where po.skus = p.cod_pro
                   )';
   $db->query($sql);

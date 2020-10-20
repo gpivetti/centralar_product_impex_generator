@@ -1,0 +1,36 @@
+# -----------------------------------------------------------------------
+# Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Components
+
+#% impex.setLocale(Locale.ENGLISH);
+
+# Catalogs
+$productCatalog         = centralArOutletProductCatalog
+$classificationCatalog  = centralArClassificationCatalog
+
+# Catalog's versions
+$catalogVersion       = catalogversion(catalog(id[default=$productCatalog]), version[default='Staged'])[unique=true, default=$productCatalog:Staged]
+$classCatalogVersion  = catalogversion(catalog(id[default='centralArClassificationCatalog']),version[default='1.0'])[unique=true,default='centralArClassificationCatalog:1.0']
+
+# Technical Specifications
+$technicalSpecifications = supercategories(code, $classCatalogVersion)
+
+# Attributes
+$clAttrModifiers = system='$classificationCatalog', version='1.0', translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator, lang=pt
+$feature01 = @EAN_CODE[$clAttrModifiers];
+$feature02 = @COLOR[$clAttrModifiers];
+$feature03 = @WIDTH[$clAttrModifiers];
+$feature04 = @HEIGHT[$clAttrModifiers];
+$feature05 = @DEPTH[$clAttrModifiers];
+$feature06 = @NET_WEIGHT[$clAttrModifiers];
+$feature07 = @GROSS_WEIGHT[$clAttrModifiers];
+
+INSERT_UPDATE ComponentProduct; code[unique=true]; name[lang=pt]; componentType(name[unique=true]); $technicalSpecifications; approvalstatus(code)[default='approved']; $catalogVersion;
+"#% impex.includeExternalDataMedia( ""ComponentProductOutlet.csv"" , ""UTF-8"", ';',  1 , -1 );"
+
+UPDATE ComponentProduct; code[unique=true]; $feature01 ; $feature02 ; $feature03 ; $feature04 ; $feature05 ; $feature06 ; $feature07 ; $catalogVersion;
+"#% impex.includeExternalDataMedia( ""ComponentProductAttributesOutlet.csv"" , ""UTF-8"", ';',  1 , -1 );"
+
+UPDATE CentralArProduct; code[unique=true] ; components(code[unique=true], $catalogVersion); $catalogVersion;
+"#% impex.includeExternalDataMedia( ""CentralArProductComponentsOutlet.csv"" , ""UTF-8"", ';',  1 , -1 );"

@@ -179,6 +179,9 @@ class MaterialSerpentina implements IDescriptionFields {
     else if (strpos(trim(strtolower($value)), 'duraf') !== false) {
       return 'durafim';
     }
+    else if (strpos(trim(strtolower($value)), 'micro') !== false) {
+      return 'microcanal';
+    }    
     else {
       return '';
     }    
