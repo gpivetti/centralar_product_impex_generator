@@ -66,6 +66,7 @@ INSERT_UPDATE Category; code[unique = true]			; name[lang = $lang]; idVerum ; na
 											;  SPRINGER_MIDEA     		; "Springer-Midea"
 											;  TRANE              		; "Trane"
 											;  ELGIN              		; "Elgin"
+											;  BRASTEMP              	; "Brastemp"
 											;  CASSETE            		; "cassete" 				; 30 ; "Ar Condicionado Split Cassete"
 											;  INVERTER           		; "inverter" 				; 30 ; "Ar Condicionado Split Inverter"
 											;  JANELA             		; "janela" 					; 30 ; "Ar Condicionado Janela"
@@ -264,6 +265,7 @@ INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default =
 																				;  SPRINGER_MIDEA     		;
 																				;  TRANE              		;
 																				;  ELGIN              		;
+																				;  BRASTEMP            		;
 
 INSERT_UPDATE CategoryCategoryRelation	; $categories; $supercategories[default = 'NAV_AR_CONDICIONADO']
                                       	;  CASSETE          			; 
